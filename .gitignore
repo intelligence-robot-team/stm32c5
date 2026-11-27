@@ -1,19 +1,89 @@
-CMakeLists.txt.user
+# =============================================================================
+# 版本控制提交策略
+#
+# 提交（是）:
+#   CMakeLists.txt / CMakePresets.json / cmake/ 目录 / 工具链文件
+#   FreeRTOSConfig.h、CMSIS / HAL / FreeRTOS 源码（工程自带）
+#   STM32CubeMX 生成的工程文件（*.ioc2、.settings/、generated/）
+#   app/ module/ device/ platform/ bsp/ 用户代码、cmake/user.cmake
+#   项目文档/
+#
+# 不提交（否）:
+#   build/ 编译产物、ARM GCC 安装目录、CMake / Ninja 安装程序、
+#   VS Code 插件与本地设置、各类中间文件
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# 编译产物
+# -----------------------------------------------------------------------------
+build/
+**/build/
+*.elf
+*.map
+*.bin
+*.hex
+*.s19
+*.axf
+*.o
+*.obj
+*.d
+*.a
+*.su
+*.lst
+*.log
+
+# -----------------------------------------------------------------------------
+# CMake / Ninja 生成文件
+# -----------------------------------------------------------------------------
 CMakeCache.txt
-CMakeFiles
-CMakeScripts
-Testing
-Makefile
+CMakeFiles/
+CMakeScripts/
 cmake_install.cmake
 install_manifest.txt
 compile_commands.json
 CTestTestfile.cmake
-_deps
+Testing/
+_deps/
 CMakeUserPresets.json
+.ninja_deps
+.ninja_log
+.ninja_log.*
+build.ninja
+rules.ninja
 
-# CLion
-#  JetBrains specific template is maintained in a separate JetBrains.gitignore that can
-#  be found at https://github.com/github/gitignore/blob/main/Global/JetBrains.gitignore
-#  and can be added to the global gitignore or merged into this file.  For a more nuclear
-#  option (not recommended) you can uncomment the following to ignore the entire idea folder.
-#cmake-build-*
+# -----------------------------------------------------------------------------
+# 工具链与构建工具安装目录（不入库，由开发者本地安装）
+# -----------------------------------------------------------------------------
+toolchain/
+toolchains/
+gcc-arm-none-eabi*/
+arm-none-eabi/
+cmake-3.*/
+ninja-*/
+
+# -----------------------------------------------------------------------------
+# IDE / 编辑器（VS Code 插件与本地设置通常不需要提交）
+# -----------------------------------------------------------------------------
+.vscode/
+.idea/
+*.code-workspace
+*.user
+*.swp
+*~
+
+# -----------------------------------------------------------------------------
+# 操作系统杂项
+# -----------------------------------------------------------------------------
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# -----------------------------------------------------------------------------
+# 调试与临时文件
+# -----------------------------------------------------------------------------
+*.bak
+*.tmp
+*.orig
+*.rej
+*.trace
+perf.data*
